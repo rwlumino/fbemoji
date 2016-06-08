@@ -1,10 +1,17 @@
 var chatContName = '#ChatTabsPagelet',
 	chatWindowName = '.fbNubFlyout',
 	chatWindow = chatContName + ' ' + chatWindowName,
+	chatWindowContainer = chatWindow + ' .conversation'
 	debug = 'true';
 
-
 function fbEmoji() {
+
+	// Disables console logs and alerts if debug mode inactive
+	if (debug != 'true'){
+		console.log = function() {};
+		//alert = function() {};
+	}
+
 
 /*
 Snake emoji code
@@ -24,44 +31,50 @@ Perl	"\x{1F40D}"
 JavaScript, JSON and Java	\uD83D\uDC0D
 C	\U0001F40D
 CSS	\01F40D
-
 */
 
-	if (debug != 'true'){
-		console.log = function() {};
-		alert = function() {};
-	}
-
 	var i = 1;
+
+	// Chat window loop
 	$(chatWindow).each( function loopChatWindows(){
 
-		var chatWindowTitle = $(this).find('.titlebarLabel .titlebarTextWrapper span span span').text();
-
-		if (chatWindowTitle = 'null'){
-			chatWindowTitle = $(this).find('.titlebarLabel .titlebarTextWrapper span span').text();
-		}
-
+		var chatWindowTitle = $(this).find('.titlebarLabel .titlebarTextWrapper span span').text();
 		console.log('Found chat window ' + i +': ' + chatWindowTitle);
 
+		// Replace emoji
 		$(this).find('div[aria-label]').each( function replaceEmoji(){
 			var ariaLabel = $(this).attr('aria-label');
 			console.log('    Found element matching ' + ariaLabel);
 			$(this).find('img').attr('src', '//emojipedia-us.s3.amazonaws.com/cache/22/d4/22d4c74970a07cbdfcccb48620dc160a.png');
 		});
+
 		i++;
 	});
+
+	$('.conversation').change( function () {
+		alert('asd');
+			/*var chatWindowTitle = $(this).find('.titlebarLabel .titlebarTextWrapper span span span').text();
+			if (chatWindowTitle = 'null'){
+				chatWindowTitle = $(this).find('.titlebarLabel .titlebarTextWrapper span span').text();
+			}
+
+			alert('Change in chat window ' + i +': ' + chatWindowTitle);
+			*/
+			fbEmoji();
+	});
+
 }
 
-$(document).ready( function() {
-	setTimeout(function() {
+
+
+$(document).ready( function () {
+	setTimeout(function () {
 		fbEmoji();
 	}, 2000);
+
 });
 
-$(chatWindow + ' .fbNubFlyoutBody.scrollable').scroll( function() {
-	console.log('Scrolling');
-	setTimeout(function() {
-		fbEmoji();
-	}, 2000);
-});
+
+
+
 
