@@ -9,7 +9,7 @@ function fbEmoji() {
 	// Disables console logs and alerts if debug mode inactive
 	if (debug != 'true'){
 		console.log = function() {};
-		//alert = function() {};
+		alert = function() {};
 	}
 
 
@@ -60,7 +60,7 @@ CSS	\01F40D
 
 			alert('Change in chat window ' + i +': ' + chatWindowTitle);
 			*/
-			fbEmoji();
+		fbEmoji();
 	});
 
 }
@@ -71,7 +71,6 @@ $(document).ready( function () {
 	setTimeout(function () {
 		fbEmoji();
 	}, 2000);
-
 });
 
 
